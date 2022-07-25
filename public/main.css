@@ -1,0 +1,93 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    outline: none;
+    font-family: 'Black Ops One', cursive;
+}
+button > svg {
+    height: 20px;
+    width: 20px;
+}
+
+body {
+    width: 100vw;
+    min-height: 100vh;
+    background: linear-gradient(to top right, #c7c7c7 70%, #31535c);
+}
+
+header {
+    width: 100%;
+    padding: 10px;
+}
+
+header h3 svg {
+    height: 20px;
+    width: 20px;
+    fill: #31535c;
+}
+
+main {
+    width: 100%;
+    max-width: 1000px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.border-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    margin: 0 auto;
+    border: 4px solid #666;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+
+form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 20px;
+    color: #666;
+    border-radius: 5px;
+    border: none;
+}
+
+.agreement, .remember {
+    padding: 10px;
+    font-size: 11px;
+    color: #335863;
+}
+
+input[type="submit"] {
+    color: #335863;
+    cursor: pointer;
+    transition: all ease-in;
+}
+
+input[type="submit"]:hover {
+    background-color: #ddd;
+    padding-left: 30px;
+    transition: all ease-in;
+}

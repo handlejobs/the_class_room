@@ -1,0 +1,14 @@
+
+
+main ul li {
+    transition: all ease-out 250ms;
+}
+
+main ul li a {
+    color: #666;
+}
+
+main ul li:hover{
+    padding-left: 20px;
+    transition: all ease-in 250ms;
+}

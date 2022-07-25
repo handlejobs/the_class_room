@@ -1,0 +1,88 @@
+
+
+.dash {
+    margin: 20px 0;
+    padding: 10px;
+    color: #1a505a;
+}
+
+#location {
+    font-size: 14px;
+    color: #666;
+}
+
+.content-box {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.options,
+.user-controls {
+    display: flex;
+    align-items: center;
+}
+
+.options>li,
+.user-controls>li {
+    position: relative;
+    padding: 5px 10px;
+    border-radius: 30px 30px 0 0;
+}
+
+.user-controls>li.active {
+    background-color: #cfd1d1;
+}
+
+.user-controls>li.active svg {
+    stroke: green;
+}
+
+.options>li>button,
+.user-controls>li>button {
+    border: none;
+    background: transparent;
+    padding: 3px;
+}
+
+.options>li>button::after,
+.user-controls>li>button::after {
+    content: attr(data-description);
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    font-size: 10px;
+    display: none;
+    color: #666;
+    z-index: 1;
+}
+
+.options>li>button:hover::after,
+.user-controls>li>button:hover::after {
+    display: block;
+}
+
+.options>li>button>svg,
+.user-controls>li button>svg {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.options>li:last-child button > svg {
+    fill: red;
+    stroke: red;
+}
+
+.content {
+    width: 100%;
+    background-color: #cfd1d1;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 30px 30px 30px;
+    box-shadow: 0px 15px 15px -12px #666;
+}
