@@ -31,7 +31,7 @@ function loginUser(e) {
             user = data.user
             // save user in session
             sessionStorage.setItem('user', JSON.stringify(user));
-            if (elements[rememberId].checked) localStorage.setItem('remember', true)
+            if (elements[rememberId].checked) setCookie('remember', true, 7)
             localStorage.setItem('alive', true)
             window.location = '../user/'
         }).catch(error => {

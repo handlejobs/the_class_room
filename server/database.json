@@ -1,1 +1,1 @@
-{"admin":[],"users":[{"username":"User","email":"email@mail.com","password":"1234567"},{"username":"User1","email":"email1@mail.com","password":"1234567"},{"username":"admin","email":"mattermills2021@gmail.com","password":"dfsgsdgsdgsdfgs"}],"groups":[]}
+{"admin":[],"users":[{"username":"user1","fname":"Uche","lname":"Omego","phone":"08077766655","email":"email@mail.com","password":"123456","last_login":1658840763316}],"groups":[]}

@@ -8,7 +8,11 @@
     <title>Login || <span id="site-name"></span></title>
     <link rel="stylesheet" href="../main.css">
     <script>
-        if ([true, 'true'].includes(localStorage.getItem("remember")) || [true, 'true'].includes(localStorage.getItem("alive"))) {
+        const user = sessionStorage.user
+        if (
+            [true, 'true'].includes(getCookie("remember")) ||
+            [null, 'null', undefined, 'undefined'].includes(user)
+        ) {
             window.location = '../user/'
         }
     </script>
@@ -138,6 +142,7 @@
         </form>
     </main>
 
+    <script src="../addon.js"></script>
     <script src="script.js"></script>
 </body>
 

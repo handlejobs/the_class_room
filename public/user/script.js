@@ -1,11 +1,30 @@
 
 
-function logoutUser() {
+async function logoutUser() {
     localStorage.setItem('alive', false)
     localStorage.removeItem('remember')
+    let user = sessionStorage.user
+    user = JSON.parse(user)
 
+    fetch('http://127.0.0.1:3333/logout', {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({ email: user.email })
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            if (data.message == 'OK') {
+                sessionStorage.removeItem('user')
+                window.location = '../'
+            } else
+                alert(data.message)
+        })
+        .catch(err => console.error(err))
 
-    window.location = '../'
 }
 
 function loadPage(page) {
@@ -39,8 +58,16 @@ window.onload = () => {
     } else {
         user = JSON.parse(user)
         let dash = document.getElementById('dash')
+        let welcome_note
 
-        dash.innerHTML = `<p>Hi ${user.username}, Welcome to your user account.</p><p>Your connected email address is ${user.email}</p>`
+        if (user.last_login) {
+            let last_login = new Date(user.last_login)
+            last_login = last_login.toUTCString()
+            welcome_note = `<p>Hi ${user.fname}, Welcome back.</p><p class="update">Your last login was ${last_login}</p>`
+        } else
+            welcome_note = `<p>Hi ${user.fname}, Welcome to your user account.</p><p class="update">Get started or contact support for assistance.</p>`
+
+        dash.innerHTML = welcome_note
     }
 
     const user_controls = document.querySelector('.user-controls').children

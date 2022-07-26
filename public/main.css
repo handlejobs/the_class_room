@@ -91,3 +91,17 @@ input[type="submit"]:hover {
     padding-left: 30px;
     transition: all ease-in;
 }
+
+.split-input {
+    display: flex;
+    justify-content: space-between;
+}
+
+.split-input>input {
+    width: 48%;
+}
+
+.instruct {
+    font-size: 10px;
+    color: #666;
+}

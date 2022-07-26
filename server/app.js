@@ -34,28 +34,40 @@ app.get("/", (req, res) => {
 })
 
 app.post("/reg", async (req, res) => {
-    const email = req.body.email
+    const data = req.body
+    const email = data.email
+
+    let timestamp = new Date()
+    timestamp = timestamp.getTime()
+    data.timestamp = timestamp
+
     try {
         // read database and check if email exists
         const base = manageFile('r', 'database.json')
         const users = base.users
 
-        users.forEach(user => {
-            if (user.email === email) return res.sendStatus(302).send({ message: "user with this email already exists" })
-        })
+        const exists = users.filter(user => user.email === email)
 
-        base.users.push(req.body)
+        if (exists.length > 0)
+            return res.status(302).send({ message: "user with this email already exists" })
+
+        base.users.push(data)
         // write data to database file
         manageFile('w', 'database.json', base)
         return res.send('OK')
+
     } catch (err) {
-        return res.sendStatus(500).send({ message: err.message })
+        return res.status(500).send({ message: err.message })
     }
 
 })
 app.post("/login", (req, res) => {
     const username = req.body.username
     const password = req.body.password
+
+    let timestamp = new Date()
+    timestamp = timestamp.getTime()
+
     try {
         // read database and check if email exists
         const base = manageFile('r', 'database.json')
@@ -66,6 +78,11 @@ app.post("/login", (req, res) => {
         if (account_user.length <= 0) account_user = null
         if (account_user !== null) {
             account_user = account_user[0]
+
+            // record login activity
+            base.users[users.indexOf(account_user)].last_login = timestamp
+            manageFile('w', 'database.json', base)
+
             if (account_user.password === password) return res.send({ user: account_user })
             else return res.sendStatus(300).send({ message: "Invalid password provided" })
         } else return res.sendStatus(404).send({ message: "User with this username does not exist" })
@@ -73,7 +90,29 @@ app.post("/login", (req, res) => {
         return res.sendStatus(500).send({ message: err.message })
     }
 })
-app.put("/modify", (req, res) => { })
+app.put("/logout", (req, res) => {
+    const email = req.body.email
+    let timestamp = new Date()
+    timestamp = timestamp.getTime()
+
+    try {
+        // read database and check if email exists
+        const base = manageFile('r', 'database.json')
+        const users = base.users
+
+
+        let account_user = users.filter(user => user.email == email)
+        if (account_user.length <= 0)
+            return res.status(404).send({ message: "User does not exist" })
+
+        // record login activity
+        base.users[users.indexOf(account_user[0])].last_login = timestamp
+        manageFile('w', 'database.json', base)
+        return res.send({ message: 'OK' })
+    } catch (err) {
+        return res.status(500).send({ message: err.message })
+    }
+})
 
 
 app.listen(PORT, function () {
